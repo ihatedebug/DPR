@@ -1,0 +1,855 @@
+[2022-01-11 10:10:59,745][root][INFO] - args.local_rank 2
+[2022-01-11 10:10:59,745][root][INFO] - WORLD_SIZE 3
+[2022-01-11 10:10:59,745][root][INFO] - args.local_rank 1
+[2022-01-11 10:10:59,746][root][INFO] - WORLD_SIZE 3
+[2022-01-11 10:10:59,755][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 2
+[2022-01-11 10:10:59,755][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 1
+[2022-01-11 10:10:59,757][root][INFO] - args.local_rank 0
+[2022-01-11 10:10:59,757][root][INFO] - WORLD_SIZE 3
+[2022-01-11 10:10:59,762][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 0
+[2022-01-11 10:10:59,762][torch.distributed.distributed_c10d][INFO] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 3 nodes.
+[2022-01-11 10:10:59,762][root][INFO] - Initialized host 0de619824160 as d.rank 0 on device=cuda:0, n_gpu=1, world size=3
+[2022-01-11 10:10:59,762][root][INFO] - 16-bits training: False 
+[2022-01-11 10:10:59,763][root][INFO] - CFG (after gpu  configuration):
+[2022-01-11 10:10:59,766][torch.distributed.distributed_c10d][INFO] - Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 3 nodes.
+[2022-01-11 10:10:59,766][torch.distributed.distributed_c10d][INFO] - Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 3 nodes.
+[2022-01-11 10:10:59,766][root][INFO] - Initialized host 0de619824160 as d.rank 1 on device=cuda:1, n_gpu=1, world size=3
+[2022-01-11 10:10:59,766][root][INFO] - Initialized host 0de619824160 as d.rank 2 on device=cuda:2, n_gpu=1, world size=3
+[2022-01-11 10:10:59,766][root][INFO] - 16-bits training: False 
+[2022-01-11 10:10:59,766][root][INFO] - 16-bits training: False 
+[2022-01-11 10:10:59,766][root][INFO] - ***** Initializing components for training *****
+[2022-01-11 10:10:59,767][root][INFO] - ***** Initializing components for training *****
+[2022-01-11 10:10:59,767][root][INFO] - Checkpoint files []
+[2022-01-11 10:10:59,767][root][INFO] - Checkpoint files []
+[2022-01-11 10:10:59,768][root][INFO] - encoder:
+  encoder_model_type: hf_bert
+  pretrained_model_cfg: bert-base-uncased
+  pretrained_file: null
+  projection_dim: 0
+  sequence_length: 256
+  dropout: 0.1
+  fix_ctx_encoder: false
+  pretrained: true
+train:
+  batch_size: 16
+  dev_batch_size: 64
+  adam_eps: 1.0e-08
+  adam_betas: (0.9, 0.999)
+  max_grad_norm: 2.0
+  log_batch_step: 100
+  train_rolling_loss_step: 100
+  weight_decay: 0.0
+  learning_rate: 7.5e-06
+  warmup_steps: 1237
+  gradient_accumulation_steps: 1
+  num_train_epochs: 40
+  eval_per_epoch: 1
+  hard_negatives: 1
+  other_negatives: 0
+  val_av_rank_hard_neg: 30
+  val_av_rank_other_neg: 30
+  val_av_rank_bsz: 128
+  val_av_rank_max_qs: 10000
+datasets:
+  nq_train:
+    _target_: dpr.data.biencoder_data.JsonQADataset
+    file: data.retriever.nq-train
+  nq_train_hn1:
+    _target_: dpr.data.biencoder_data.JsonQADataset
+    file: data.retriever.nq-adv-hn-train
+  nq_dev:
+    _target_: dpr.data.biencoder_data.JsonQADataset
+    file: data.retriever.nq-dev
+  trivia_train:
+    _target_: dpr.data.biencoder_data.JsonQADataset
+    file: data.retriever.trivia-train
+  trivia_dev:
+    _target_: dpr.data.biencoder_data.JsonQADataset
+    file: data.retriever.trivia-dev
+  squad1_train:
+    _target_: dpr.data.biencoder_data.JsonQADataset
+    file: data.retriever.squad1-train
+  squad1_dev:
+    _target_: dpr.data.biencoder_data.JsonQADataset
+    file: data.retriever.squad1-dev
+  webq_train:
+    _target_: dpr.data.biencoder_data.JsonQADataset
+    file: data.retriever.webq-train
+  webq_dev:
+    _target_: dpr.data.biencoder_data.JsonQADataset
+    file: data.retriever.webq-dev
+  curatedtrec_train:
+    _target_: dpr.data.biencoder_data.JsonQADataset
+    file: data.retriever.curatedtrec-train
+  curatedtrec_dev:
+    _target_: dpr.data.biencoder_data.JsonQADataset
+    file: data.retriever.curatedtrec-dev
+train_datasets:
+- nq_train
+dev_datasets:
+- nq_dev
+output_dir: ./nq_out
+train_sampling_rates: null
+loss_scale_factors: null
+do_lower_case: true
+fix_ctx_encoder: false
+val_av_rank_start_epoch: 30
+seed: 12345
+checkpoint_file_name: dpr_biencoder
+model_file: null
+local_rank: 0
+global_loss_buf_sz: 592000
+device: cuda:0
+distributed_world_size: 3
+distributed_port: null
+no_cuda: false
+n_gpu: 1
+fp16: false
+fp16_opt_level: O1
+special_tokens: null
+ignore_checkpoint_offset: false
+ignore_checkpoint_optimizer: false
+multi_q_encoder: false
+
+[2022-01-11 10:10:59,768][root][INFO] - ***** Initializing components for training *****
+[2022-01-11 10:10:59,769][root][INFO] - Checkpoint files []
+[2022-01-11 10:10:59,771][transformers.file_utils][INFO] - PyTorch version 1.10.1 available.
+[2022-01-11 10:10:59,771][transformers.file_utils][INFO] - PyTorch version 1.10.1 available.
+[2022-01-11 10:10:59,772][transformers.file_utils][INFO] - PyTorch version 1.10.1 available.
+[2022-01-11 10:11:00,968][transformers.configuration_utils][INFO] - loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-config.json from cache at /root/.cache/torch/transformers/4dad0251492946e18ac39290fcfe91b89d370fee250efe9521476438fe8ca185.7156163d5fdc189c3016baca0775ffce230789d7fa2a42ef516483e4ca884517
+[2022-01-11 10:11:00,969][transformers.configuration_utils][INFO] - Model config BertConfig {
+  "architectures": [
+    "BertForMaskedLM"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "gradient_checkpointing": false,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "layer_norm_eps": 1e-12,
+  "max_position_embeddings": 512,
+  "model_type": "bert",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 0,
+  "type_vocab_size": 2,
+  "vocab_size": 30522
+}
+
+[2022-01-11 10:11:00,971][transformers.configuration_utils][INFO] - loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-config.json from cache at /root/.cache/torch/transformers/4dad0251492946e18ac39290fcfe91b89d370fee250efe9521476438fe8ca185.7156163d5fdc189c3016baca0775ffce230789d7fa2a42ef516483e4ca884517
+[2022-01-11 10:11:00,972][transformers.configuration_utils][INFO] - Model config BertConfig {
+  "architectures": [
+    "BertForMaskedLM"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "gradient_checkpointing": false,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "layer_norm_eps": 1e-12,
+  "max_position_embeddings": 512,
+  "model_type": "bert",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 0,
+  "type_vocab_size": 2,
+  "vocab_size": 30522
+}
+
+[2022-01-11 10:11:00,972][transformers.configuration_utils][INFO] - loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-config.json from cache at /root/.cache/torch/transformers/4dad0251492946e18ac39290fcfe91b89d370fee250efe9521476438fe8ca185.7156163d5fdc189c3016baca0775ffce230789d7fa2a42ef516483e4ca884517
+[2022-01-11 10:11:00,973][transformers.configuration_utils][INFO] - Model config BertConfig {
+  "architectures": [
+    "BertForMaskedLM"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "gradient_checkpointing": false,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "layer_norm_eps": 1e-12,
+  "max_position_embeddings": 512,
+  "model_type": "bert",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 0,
+  "type_vocab_size": 2,
+  "vocab_size": 30522
+}
+
+[2022-01-11 10:11:01,219][transformers.modeling_utils][INFO] - loading weights file https://cdn.huggingface.co/bert-base-uncased-pytorch_model.bin from cache at /root/.cache/torch/transformers/f2ee78bdd635b758cc0a12352586868bef80e47401abe4c4fcc3832421e7338b.36ca03ab34a1a5d5fa7bc3d03d55c4fa650fed07220e2eeebc06ce58d0e9a157
+[2022-01-11 10:11:01,222][transformers.modeling_utils][INFO] - loading weights file https://cdn.huggingface.co/bert-base-uncased-pytorch_model.bin from cache at /root/.cache/torch/transformers/f2ee78bdd635b758cc0a12352586868bef80e47401abe4c4fcc3832421e7338b.36ca03ab34a1a5d5fa7bc3d03d55c4fa650fed07220e2eeebc06ce58d0e9a157
+[2022-01-11 10:11:01,241][transformers.modeling_utils][INFO] - loading weights file https://cdn.huggingface.co/bert-base-uncased-pytorch_model.bin from cache at /root/.cache/torch/transformers/f2ee78bdd635b758cc0a12352586868bef80e47401abe4c4fcc3832421e7338b.36ca03ab34a1a5d5fa7bc3d03d55c4fa650fed07220e2eeebc06ce58d0e9a157
+[2022-01-11 10:11:03,720][transformers.modeling_utils][INFO] - All model checkpoint weights were used when initializing HFBertEncoder.
+
+[2022-01-11 10:11:03,720][transformers.modeling_utils][INFO] - All the weights of HFBertEncoder were initialized from the model checkpoint at bert-base-uncased.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use HFBertEncoder for predictions without further training.
+[2022-01-11 10:11:03,720][transformers.modeling_utils][INFO] - All model checkpoint weights were used when initializing HFBertEncoder.
+
+[2022-01-11 10:11:03,720][transformers.modeling_utils][INFO] - All the weights of HFBertEncoder were initialized from the model checkpoint at bert-base-uncased.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use HFBertEncoder for predictions without further training.
+[2022-01-11 10:11:03,721][transformers.modeling_utils][INFO] - All model checkpoint weights were used when initializing HFBertEncoder.
+
+[2022-01-11 10:11:03,722][transformers.modeling_utils][INFO] - All the weights of HFBertEncoder were initialized from the model checkpoint at bert-base-uncased.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use HFBertEncoder for predictions without further training.
+[2022-01-11 10:11:04,537][transformers.configuration_utils][INFO] - loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-config.json from cache at /root/.cache/torch/transformers/4dad0251492946e18ac39290fcfe91b89d370fee250efe9521476438fe8ca185.7156163d5fdc189c3016baca0775ffce230789d7fa2a42ef516483e4ca884517
+[2022-01-11 10:11:04,538][transformers.configuration_utils][INFO] - Model config BertConfig {
+  "architectures": [
+    "BertForMaskedLM"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "gradient_checkpointing": false,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "layer_norm_eps": 1e-12,
+  "max_position_embeddings": 512,
+  "model_type": "bert",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 0,
+  "type_vocab_size": 2,
+  "vocab_size": 30522
+}
+
+[2022-01-11 10:11:04,564][transformers.configuration_utils][INFO] - loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-config.json from cache at /root/.cache/torch/transformers/4dad0251492946e18ac39290fcfe91b89d370fee250efe9521476438fe8ca185.7156163d5fdc189c3016baca0775ffce230789d7fa2a42ef516483e4ca884517
+[2022-01-11 10:11:04,565][transformers.configuration_utils][INFO] - Model config BertConfig {
+  "architectures": [
+    "BertForMaskedLM"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "gradient_checkpointing": false,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "layer_norm_eps": 1e-12,
+  "max_position_embeddings": 512,
+  "model_type": "bert",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 0,
+  "type_vocab_size": 2,
+  "vocab_size": 30522
+}
+
+[2022-01-11 10:11:04,580][transformers.configuration_utils][INFO] - loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-config.json from cache at /root/.cache/torch/transformers/4dad0251492946e18ac39290fcfe91b89d370fee250efe9521476438fe8ca185.7156163d5fdc189c3016baca0775ffce230789d7fa2a42ef516483e4ca884517
+[2022-01-11 10:11:04,581][transformers.configuration_utils][INFO] - Model config BertConfig {
+  "architectures": [
+    "BertForMaskedLM"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "gradient_checkpointing": false,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "layer_norm_eps": 1e-12,
+  "max_position_embeddings": 512,
+  "model_type": "bert",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 0,
+  "type_vocab_size": 2,
+  "vocab_size": 30522
+}
+
+[2022-01-11 10:11:04,613][transformers.modeling_utils][INFO] - loading weights file https://cdn.huggingface.co/bert-base-uncased-pytorch_model.bin from cache at /root/.cache/torch/transformers/f2ee78bdd635b758cc0a12352586868bef80e47401abe4c4fcc3832421e7338b.36ca03ab34a1a5d5fa7bc3d03d55c4fa650fed07220e2eeebc06ce58d0e9a157
+[2022-01-11 10:11:04,649][transformers.modeling_utils][INFO] - loading weights file https://cdn.huggingface.co/bert-base-uncased-pytorch_model.bin from cache at /root/.cache/torch/transformers/f2ee78bdd635b758cc0a12352586868bef80e47401abe4c4fcc3832421e7338b.36ca03ab34a1a5d5fa7bc3d03d55c4fa650fed07220e2eeebc06ce58d0e9a157
+[2022-01-11 10:11:04,662][transformers.modeling_utils][INFO] - loading weights file https://cdn.huggingface.co/bert-base-uncased-pytorch_model.bin from cache at /root/.cache/torch/transformers/f2ee78bdd635b758cc0a12352586868bef80e47401abe4c4fcc3832421e7338b.36ca03ab34a1a5d5fa7bc3d03d55c4fa650fed07220e2eeebc06ce58d0e9a157
+[2022-01-11 10:11:07,028][transformers.modeling_utils][INFO] - All model checkpoint weights were used when initializing HFBertEncoder.
+
+[2022-01-11 10:11:07,028][transformers.modeling_utils][INFO] - All the weights of HFBertEncoder were initialized from the model checkpoint at bert-base-uncased.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use HFBertEncoder for predictions without further training.
+[2022-01-11 10:11:07,070][transformers.modeling_utils][INFO] - All model checkpoint weights were used when initializing HFBertEncoder.
+
+[2022-01-11 10:11:07,070][transformers.modeling_utils][INFO] - All the weights of HFBertEncoder were initialized from the model checkpoint at bert-base-uncased.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use HFBertEncoder for predictions without further training.
+[2022-01-11 10:11:07,080][transformers.modeling_utils][INFO] - All model checkpoint weights were used when initializing HFBertEncoder.
+
+[2022-01-11 10:11:07,080][transformers.modeling_utils][INFO] - All the weights of HFBertEncoder were initialized from the model checkpoint at bert-base-uncased.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use HFBertEncoder for predictions without further training.
+[2022-01-11 10:11:07,888][transformers.tokenization_utils_base][INFO] - loading file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-vocab.txt from cache at /root/.cache/torch/transformers/26bc1ad6c0ac742e9b52263248f6d0f00068293b33709fae12320c0e35ccfbbb.542ce4285a40d23a559526243235df47c5f75c197f04f37d1a0c124c32c9a084
+[2022-01-11 10:11:07,911][transformers.tokenization_utils_base][INFO] - loading file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-vocab.txt from cache at /root/.cache/torch/transformers/26bc1ad6c0ac742e9b52263248f6d0f00068293b33709fae12320c0e35ccfbbb.542ce4285a40d23a559526243235df47c5f75c197f04f37d1a0c124c32c9a084
+[2022-01-11 10:11:07,919][transformers.tokenization_utils_base][INFO] - loading file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-vocab.txt from cache at /root/.cache/torch/transformers/26bc1ad6c0ac742e9b52263248f6d0f00068293b33709fae12320c0e35ccfbbb.542ce4285a40d23a559526243235df47c5f75c197f04f37d1a0c124c32c9a084
+[2022-01-11 10:11:13,183][dpr.utils.conf_utils][INFO] - train_datasets: ['nq_train']
+[2022-01-11 10:11:13,183][dpr.utils.conf_utils][INFO] - train_datasets: ['nq_train']
+[2022-01-11 10:11:13,183][dpr.utils.conf_utils][INFO] - train_datasets: ['nq_train']
+[2022-01-11 10:11:13,184][dpr.data.biencoder_data][INFO] - Data files: []
+[2022-01-11 10:11:13,184][dpr.data.biencoder_data][INFO] - Data files: []
+[2022-01-11 10:11:13,184][dpr.utils.conf_utils][INFO] - dev_datasets: ['nq_dev']
+[2022-01-11 10:11:13,184][dpr.utils.conf_utils][INFO] - dev_datasets: ['nq_dev']
+[2022-01-11 10:11:13,184][dpr.data.biencoder_data][INFO] - Data files: []
+[2022-01-11 10:11:13,185][dpr.utils.conf_utils][INFO] - dev_datasets: ['nq_dev']
+[2022-01-11 10:11:13,185][dpr.data.biencoder_data][INFO] - Data files: []
+[2022-01-11 10:11:13,185][dpr.data.biencoder_data][INFO] - Data files: []
+[2022-01-11 10:11:13,185][root][INFO] - Initializing task/set data ['nq_train']
+[2022-01-11 10:11:13,185][root][INFO] - Initializing task/set data ['nq_train']
+[2022-01-11 10:11:13,185][dpr.data.biencoder_data][INFO] - Data files: []
+[2022-01-11 10:11:13,185][root][INFO] - Initializing task/set data ['nq_train']
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - Requested resource from https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-train.json.gz
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - Requested resource from https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-train.json.gz
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - Download root_dir /root/DPR
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - Download root_dir /root/DPR
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - File to be downloaded as /root/DPR/downloads/data/retriever/nq-train.json
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - File to be downloaded as /root/DPR/downloads/data/retriever/nq-train.json
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/nq-train.json
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/nq-train.json
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - Loading from https://dl.fbaipublicfiles.com/dpr/nq_license/LICENSE
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - Requested resource from https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-train.json.gz
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - Loading from https://dl.fbaipublicfiles.com/dpr/nq_license/LICENSE
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/LICENSE
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/LICENSE
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - Loading from https://dl.fbaipublicfiles.com/dpr/nq_license/README
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - Download root_dir /root/DPR
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - Loading from https://dl.fbaipublicfiles.com/dpr/nq_license/README
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/README
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/README
+[2022-01-11 10:11:13,187][root][INFO] - Reading file /root/DPR/downloads/data/retriever/nq-train.json
+[2022-01-11 10:11:13,187][root][INFO] - Reading file /root/DPR/downloads/data/retriever/nq-train.json
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - File to be downloaded as /root/DPR/downloads/data/retriever/nq-train.json
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/nq-train.json
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - Loading from https://dl.fbaipublicfiles.com/dpr/nq_license/LICENSE
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/LICENSE
+[2022-01-11 10:11:13,187][dpr.data.download_data][INFO] - Loading from https://dl.fbaipublicfiles.com/dpr/nq_license/README
+[2022-01-11 10:11:13,188][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/README
+[2022-01-11 10:11:13,188][root][INFO] - Reading file /root/DPR/downloads/data/retriever/nq-train.json
+[2022-01-11 10:11:53,567][root][INFO] - Aggregated data size: 58880
+[2022-01-11 10:11:53,591][dpr.data.biencoder_data][INFO] - Total cleaned data size: 58880
+[2022-01-11 10:11:53,593][root][INFO] - samples_per_shard=19627, shard_start_idx=39254, shard_end_idx=58880, max_iterations=1226
+[2022-01-11 10:11:53,593][root][INFO] - rank=2; Multi set data sizes [58880]
+[2022-01-11 10:11:53,593][root][INFO] - rank=2; Multi set total data 58880
+[2022-01-11 10:11:53,593][root][INFO] - rank=2; Multi set sampling_rates None
+[2022-01-11 10:11:53,593][root][INFO] - rank=2; Multi set max_iterations per dataset [1226]
+[2022-01-11 10:11:53,593][root][INFO] - rank=2; Multi set max_iterations 1226
+[2022-01-11 10:11:53,594][root][INFO] -   Total iterations per epoch=1226
+[2022-01-11 10:11:53,594][root][INFO] -  Total updates=49040
+[2022-01-11 10:11:53,594][root][INFO] -   Eval step = 1226
+[2022-01-11 10:11:53,594][root][INFO] - ***** Training *****
+[2022-01-11 10:11:53,594][root][INFO] - ***** Epoch 0 *****
+[2022-01-11 10:11:53,595][root][INFO] - rank=2; Iteration start
+[2022-01-11 10:11:53,595][root][INFO] - rank=2; Multi set iteration: iteration ptr per set: [0]
+[2022-01-11 10:11:53,595][root][INFO] - rank=2; Multi set iteration: source 0, batches to be taken: 1226
+[2022-01-11 10:11:53,596][root][INFO] - rank=2; data_src_indices len=1226
+[2022-01-11 10:11:53,653][root][INFO] - Aggregated data size: 58880
+[2022-01-11 10:11:53,677][dpr.data.biencoder_data][INFO] - Total cleaned data size: 58880
+[2022-01-11 10:11:53,679][root][INFO] - samples_per_shard=19627, shard_start_idx=0, shard_end_idx=19627, max_iterations=1226
+[2022-01-11 10:11:53,679][root][INFO] - rank=0; Multi set data sizes [58880]
+[2022-01-11 10:11:53,679][root][INFO] - rank=0; Multi set total data 58880
+[2022-01-11 10:11:53,679][root][INFO] - rank=0; Multi set sampling_rates None
+[2022-01-11 10:11:53,679][root][INFO] - rank=0; Multi set max_iterations per dataset [1226]
+[2022-01-11 10:11:53,679][root][INFO] - rank=0; Multi set max_iterations 1226
+[2022-01-11 10:11:53,679][root][INFO] -   Total iterations per epoch=1226
+[2022-01-11 10:11:53,680][root][INFO] -  Total updates=49040
+[2022-01-11 10:11:53,680][root][INFO] -   Eval step = 1226
+[2022-01-11 10:11:53,680][root][INFO] - ***** Training *****
+[2022-01-11 10:11:53,680][root][INFO] - ***** Epoch 0 *****
+[2022-01-11 10:11:53,681][root][INFO] - rank=0; Iteration start
+[2022-01-11 10:11:53,681][root][INFO] - rank=0; Multi set iteration: iteration ptr per set: [0]
+[2022-01-11 10:11:53,681][root][INFO] - rank=0; Multi set iteration: source 0, batches to be taken: 1226
+[2022-01-11 10:11:53,682][root][INFO] - rank=0; data_src_indices len=1226
+[2022-01-11 10:11:55,914][root][INFO] - Aggregated data size: 58880
+[2022-01-11 10:11:55,945][dpr.data.biencoder_data][INFO] - Total cleaned data size: 58880
+[2022-01-11 10:11:55,947][root][INFO] - samples_per_shard=19627, shard_start_idx=19627, shard_end_idx=39254, max_iterations=1226
+[2022-01-11 10:11:55,947][root][INFO] - rank=1; Multi set data sizes [58880]
+[2022-01-11 10:11:55,947][root][INFO] - rank=1; Multi set total data 58880
+[2022-01-11 10:11:55,947][root][INFO] - rank=1; Multi set sampling_rates None
+[2022-01-11 10:11:55,947][root][INFO] - rank=1; Multi set max_iterations per dataset [1226]
+[2022-01-11 10:11:55,947][root][INFO] - rank=1; Multi set max_iterations 1226
+[2022-01-11 10:11:55,947][root][INFO] -   Total iterations per epoch=1226
+[2022-01-11 10:11:55,948][root][INFO] -  Total updates=49040
+[2022-01-11 10:11:55,948][root][INFO] -   Eval step = 1226
+[2022-01-11 10:11:55,948][root][INFO] - ***** Training *****
+[2022-01-11 10:11:55,948][root][INFO] - ***** Epoch 0 *****
+[2022-01-11 10:11:55,950][root][INFO] - rank=1; Iteration start
+[2022-01-11 10:11:55,950][root][INFO] - rank=1; Multi set iteration: iteration ptr per set: [0]
+[2022-01-11 10:11:55,950][root][INFO] - rank=1; Multi set iteration: source 0, batches to be taken: 1226
+[2022-01-11 10:11:55,950][root][INFO] - rank=1; data_src_indices len=1226
+[2022-01-11 10:11:57,522][root][INFO] - Epoch: 0: Step: 1/1226, loss=26.796499, lr=0.000000
+[2022-01-11 10:11:57,526][root][INFO] - Epoch: 0: Step: 1/1226, loss=26.796499, lr=0.000000
+[2022-01-11 10:11:57,542][root][INFO] - Epoch: 0: Step: 1/1226, loss=26.796499, lr=0.000000
+[2022-01-11 10:13:07,356][root][INFO] - Train batch 100
+[2022-01-11 10:13:07,356][root][INFO] - Avg. loss per last 100 batches: 19.702960
+[2022-01-11 10:13:07,359][root][INFO] - Train batch 100
+[2022-01-11 10:13:07,359][root][INFO] - Avg. loss per last 100 batches: 19.702960
+[2022-01-11 10:13:07,372][root][INFO] - Train batch 100
+[2022-01-11 10:13:07,372][root][INFO] - Avg. loss per last 100 batches: 19.702960
+[2022-01-11 10:13:08,058][root][INFO] - Epoch: 0: Step: 101/1226, loss=10.050423, lr=0.000001
+[2022-01-11 10:13:08,060][root][INFO] - Epoch: 0: Step: 101/1226, loss=10.050423, lr=0.000001
+[2022-01-11 10:13:08,070][root][INFO] - Epoch: 0: Step: 101/1226, loss=10.050423, lr=0.000001
+[2022-01-11 10:14:18,228][root][INFO] - Train batch 200
+[2022-01-11 10:14:18,228][root][INFO] - Avg. loss per last 100 batches: 5.845330
+[2022-01-11 10:14:18,229][root][INFO] - Train batch 200
+[2022-01-11 10:14:18,229][root][INFO] - Avg. loss per last 100 batches: 5.845330
+[2022-01-11 10:14:18,242][root][INFO] - Train batch 200
+[2022-01-11 10:14:18,242][root][INFO] - Avg. loss per last 100 batches: 5.845330
+[2022-01-11 10:14:18,927][root][INFO] - Epoch: 0: Step: 201/1226, loss=5.138041, lr=0.000001
+[2022-01-11 10:14:18,929][root][INFO] - Epoch: 0: Step: 201/1226, loss=5.138041, lr=0.000001
+[2022-01-11 10:14:18,942][root][INFO] - Epoch: 0: Step: 201/1226, loss=5.138041, lr=0.000001
+[2022-01-11 10:15:28,113][root][INFO] - Train batch 300
+[2022-01-11 10:15:28,114][root][INFO] - Avg. loss per last 100 batches: 2.759353
+[2022-01-11 10:15:28,114][root][INFO] - Train batch 300
+[2022-01-11 10:15:28,115][root][INFO] - Avg. loss per last 100 batches: 2.759353
+[2022-01-11 10:15:28,128][root][INFO] - Train batch 300
+[2022-01-11 10:15:28,128][root][INFO] - Avg. loss per last 100 batches: 2.759353
+[2022-01-11 10:15:28,819][root][INFO] - Epoch: 0: Step: 301/1226, loss=2.137061, lr=0.000002
+[2022-01-11 10:15:28,821][root][INFO] - Epoch: 0: Step: 301/1226, loss=2.137061, lr=0.000002
+[2022-01-11 10:15:28,832][root][INFO] - Epoch: 0: Step: 301/1226, loss=2.137061, lr=0.000002
+[2022-01-11 10:16:37,976][root][INFO] - Train batch 400
+[2022-01-11 10:16:37,976][root][INFO] - Avg. loss per last 100 batches: 1.182984
+[2022-01-11 10:16:37,979][root][INFO] - Train batch 400
+[2022-01-11 10:16:37,980][root][INFO] - Avg. loss per last 100 batches: 1.182984
+[2022-01-11 10:16:37,980][root][INFO] - Train batch 400
+[2022-01-11 10:16:37,980][root][INFO] - Avg. loss per last 100 batches: 1.182984
+[2022-01-11 10:16:38,661][root][INFO] - Epoch: 0: Step: 401/1226, loss=0.650856, lr=0.000002
+[2022-01-11 10:16:38,665][root][INFO] - Epoch: 0: Step: 401/1226, loss=0.650856, lr=0.000002
+[2022-01-11 10:16:38,666][root][INFO] - Epoch: 0: Step: 401/1226, loss=0.650856, lr=0.000002
+[2022-01-11 10:17:47,632][root][INFO] - Train batch 500
+[2022-01-11 10:17:47,632][root][INFO] - Avg. loss per last 100 batches: 0.637310
+[2022-01-11 10:17:47,641][root][INFO] - Train batch 500
+[2022-01-11 10:17:47,641][root][INFO] - Avg. loss per last 100 batches: 0.637310
+[2022-01-11 10:17:47,641][root][INFO] - Train batch 500
+[2022-01-11 10:17:47,641][root][INFO] - Avg. loss per last 100 batches: 0.637310
+[2022-01-11 10:17:48,326][root][INFO] - Epoch: 0: Step: 501/1226, loss=0.657495, lr=0.000003
+[2022-01-11 10:17:48,327][root][INFO] - Epoch: 0: Step: 501/1226, loss=0.657495, lr=0.000003
+[2022-01-11 10:17:48,328][root][INFO] - Epoch: 0: Step: 501/1226, loss=0.657495, lr=0.000003
+[2022-01-11 10:18:57,313][root][INFO] - Train batch 600
+[2022-01-11 10:18:57,313][root][INFO] - Avg. loss per last 100 batches: 0.483706
+[2022-01-11 10:18:57,313][root][INFO] - Train batch 600
+[2022-01-11 10:18:57,314][root][INFO] - Avg. loss per last 100 batches: 0.483706
+[2022-01-11 10:18:57,314][root][INFO] - Train batch 600
+[2022-01-11 10:18:57,314][root][INFO] - Avg. loss per last 100 batches: 0.483706
+[2022-01-11 10:18:57,999][root][INFO] - Epoch: 0: Step: 601/1226, loss=0.576337, lr=0.000004
+[2022-01-11 10:18:58,000][root][INFO] - Epoch: 0: Step: 601/1226, loss=0.576337, lr=0.000004
+[2022-01-11 10:18:58,003][root][INFO] - Epoch: 0: Step: 601/1226, loss=0.576337, lr=0.000004
+[2022-01-11 10:20:06,102][root][INFO] - Train batch 700
+[2022-01-11 10:20:06,102][root][INFO] - Avg. loss per last 100 batches: 0.397244
+[2022-01-11 10:20:06,102][root][INFO] - Train batch 700
+[2022-01-11 10:20:06,102][root][INFO] - Avg. loss per last 100 batches: 0.397244
+[2022-01-11 10:20:06,107][root][INFO] - Train batch 700
+[2022-01-11 10:20:06,107][root][INFO] - Avg. loss per last 100 batches: 0.397244
+[2022-01-11 10:20:06,785][root][INFO] - Epoch: 0: Step: 701/1226, loss=0.140263, lr=0.000004
+[2022-01-11 10:20:06,796][root][INFO] - Epoch: 0: Step: 701/1226, loss=0.140263, lr=0.000004
+[2022-01-11 10:20:06,798][root][INFO] - Epoch: 0: Step: 701/1226, loss=0.140263, lr=0.000004
+[2022-01-11 10:21:15,698][root][INFO] - Train batch 800
+[2022-01-11 10:21:15,699][root][INFO] - Avg. loss per last 100 batches: 0.342352
+[2022-01-11 10:21:15,701][root][INFO] - Train batch 800
+[2022-01-11 10:21:15,701][root][INFO] - Avg. loss per last 100 batches: 0.342352
+[2022-01-11 10:21:15,701][root][INFO] - Train batch 800
+[2022-01-11 10:21:15,702][root][INFO] - Avg. loss per last 100 batches: 0.342352
+[2022-01-11 10:21:16,381][root][INFO] - Epoch: 0: Step: 801/1226, loss=0.305653, lr=0.000005
+[2022-01-11 10:21:16,385][root][INFO] - Epoch: 0: Step: 801/1226, loss=0.305653, lr=0.000005
+[2022-01-11 10:21:16,390][root][INFO] - Epoch: 0: Step: 801/1226, loss=0.305653, lr=0.000005
+[2022-01-11 10:22:25,653][root][INFO] - Train batch 900
+[2022-01-11 10:22:25,653][root][INFO] - Avg. loss per last 100 batches: 0.316670
+[2022-01-11 10:22:25,653][root][INFO] - Train batch 900
+[2022-01-11 10:22:25,653][root][INFO] - Avg. loss per last 100 batches: 0.316670
+[2022-01-11 10:22:25,666][root][INFO] - Train batch 900
+[2022-01-11 10:22:25,666][root][INFO] - Avg. loss per last 100 batches: 0.316670
+[2022-01-11 10:22:26,346][root][INFO] - Epoch: 0: Step: 901/1226, loss=0.209939, lr=0.000005
+[2022-01-11 10:22:26,355][root][INFO] - Epoch: 0: Step: 901/1226, loss=0.209939, lr=0.000005
+[2022-01-11 10:22:26,371][root][INFO] - Epoch: 0: Step: 901/1226, loss=0.209939, lr=0.000005
+[2022-01-11 10:23:35,726][root][INFO] - Train batch 1000
+[2022-01-11 10:23:35,726][root][INFO] - Avg. loss per last 100 batches: 0.285586
+[2022-01-11 10:23:35,731][root][INFO] - Train batch 1000
+[2022-01-11 10:23:35,731][root][INFO] - Avg. loss per last 100 batches: 0.285586
+[2022-01-11 10:23:35,732][root][INFO] - Train batch 1000
+[2022-01-11 10:23:35,732][root][INFO] - Avg. loss per last 100 batches: 0.285586
+[2022-01-11 10:23:36,415][root][INFO] - Epoch: 0: Step: 1001/1226, loss=0.298237, lr=0.000006
+[2022-01-11 10:23:36,419][root][INFO] - Epoch: 0: Step: 1001/1226, loss=0.298237, lr=0.000006
+[2022-01-11 10:23:36,420][root][INFO] - Epoch: 0: Step: 1001/1226, loss=0.298237, lr=0.000006
+[2022-01-11 10:24:45,317][root][INFO] - Train batch 1100
+[2022-01-11 10:24:45,317][root][INFO] - Avg. loss per last 100 batches: 0.254313
+[2022-01-11 10:24:45,328][root][INFO] - Train batch 1100
+[2022-01-11 10:24:45,328][root][INFO] - Avg. loss per last 100 batches: 0.254313
+[2022-01-11 10:24:45,328][root][INFO] - Train batch 1100
+[2022-01-11 10:24:45,329][root][INFO] - Avg. loss per last 100 batches: 0.254313
+[2022-01-11 10:24:46,015][root][INFO] - Epoch: 0: Step: 1101/1226, loss=0.203917, lr=0.000007
+[2022-01-11 10:24:46,016][root][INFO] - Epoch: 0: Step: 1101/1226, loss=0.203917, lr=0.000007
+[2022-01-11 10:24:46,018][root][INFO] - Epoch: 0: Step: 1101/1226, loss=0.203917, lr=0.000007
+[2022-01-11 10:25:54,040][root][INFO] - Train batch 1200
+[2022-01-11 10:25:54,040][root][INFO] - Avg. loss per last 100 batches: 0.260776
+[2022-01-11 10:25:54,051][root][INFO] - Train batch 1200
+[2022-01-11 10:25:54,051][root][INFO] - Avg. loss per last 100 batches: 0.260776
+[2022-01-11 10:25:54,052][root][INFO] - Train batch 1200
+[2022-01-11 10:25:54,052][root][INFO] - Avg. loss per last 100 batches: 0.260776
+[2022-01-11 10:25:54,739][root][INFO] - Epoch: 0: Step: 1201/1226, loss=0.308088, lr=0.000007
+[2022-01-11 10:25:54,740][root][INFO] - Epoch: 0: Step: 1201/1226, loss=0.308088, lr=0.000007
+[2022-01-11 10:25:54,741][root][INFO] - Epoch: 0: Step: 1201/1226, loss=0.308088, lr=0.000007
+[2022-01-11 10:26:12,777][root][INFO] - rank=1, Validation: Epoch: 0 Step: 1226/1226
+[2022-01-11 10:26:12,777][root][INFO] - NLL validation ...
+[2022-01-11 10:26:12,778][root][INFO] - Initializing task/set data ['nq_dev']
+[2022-01-11 10:26:12,778][dpr.data.download_data][INFO] - Requested resource from https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-dev.json.gz
+[2022-01-11 10:26:12,778][dpr.data.download_data][INFO] - Download root_dir /root/DPR
+[2022-01-11 10:26:12,778][dpr.data.download_data][INFO] - File to be downloaded as /root/DPR/downloads/data/retriever/nq-dev.json
+[2022-01-11 10:26:12,779][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/nq-dev.json
+[2022-01-11 10:26:12,779][dpr.data.download_data][INFO] - Loading from https://dl.fbaipublicfiles.com/dpr/nq_license/LICENSE
+[2022-01-11 10:26:12,779][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/LICENSE
+[2022-01-11 10:26:12,779][dpr.data.download_data][INFO] - Loading from https://dl.fbaipublicfiles.com/dpr/nq_license/README
+[2022-01-11 10:26:12,779][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/README
+[2022-01-11 10:26:12,779][root][INFO] - Reading file /root/DPR/downloads/data/retriever/nq-dev.json
+[2022-01-11 10:26:12,784][root][INFO] - rank=2, Validation: Epoch: 0 Step: 1226/1226
+[2022-01-11 10:26:12,784][root][INFO] - NLL validation ...
+[2022-01-11 10:26:12,785][root][INFO] - Initializing task/set data ['nq_dev']
+[2022-01-11 10:26:12,785][dpr.data.download_data][INFO] - Requested resource from https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-dev.json.gz
+[2022-01-11 10:26:12,785][dpr.data.download_data][INFO] - Download root_dir /root/DPR
+[2022-01-11 10:26:12,786][dpr.data.download_data][INFO] - File to be downloaded as /root/DPR/downloads/data/retriever/nq-dev.json
+[2022-01-11 10:26:12,786][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/nq-dev.json
+[2022-01-11 10:26:12,786][dpr.data.download_data][INFO] - Loading from https://dl.fbaipublicfiles.com/dpr/nq_license/LICENSE
+[2022-01-11 10:26:12,786][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/LICENSE
+[2022-01-11 10:26:12,786][dpr.data.download_data][INFO] - Loading from https://dl.fbaipublicfiles.com/dpr/nq_license/README
+[2022-01-11 10:26:12,786][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/README
+[2022-01-11 10:26:12,786][root][INFO] - Reading file /root/DPR/downloads/data/retriever/nq-dev.json
+[2022-01-11 10:26:12,787][root][INFO] - rank=0, Validation: Epoch: 0 Step: 1226/1226
+[2022-01-11 10:26:12,788][root][INFO] - NLL validation ...
+[2022-01-11 10:26:12,789][root][INFO] - Initializing task/set data ['nq_dev']
+[2022-01-11 10:26:12,789][dpr.data.download_data][INFO] - Requested resource from https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-dev.json.gz
+[2022-01-11 10:26:12,789][dpr.data.download_data][INFO] - Download root_dir /root/DPR
+[2022-01-11 10:26:12,789][dpr.data.download_data][INFO] - File to be downloaded as /root/DPR/downloads/data/retriever/nq-dev.json
+[2022-01-11 10:26:12,789][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/nq-dev.json
+[2022-01-11 10:26:12,789][dpr.data.download_data][INFO] - Loading from https://dl.fbaipublicfiles.com/dpr/nq_license/LICENSE
+[2022-01-11 10:26:12,789][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/LICENSE
+[2022-01-11 10:26:12,789][dpr.data.download_data][INFO] - Loading from https://dl.fbaipublicfiles.com/dpr/nq_license/README
+[2022-01-11 10:26:12,789][dpr.data.download_data][INFO] - File already exist /root/DPR/downloads/data/retriever/README
+[2022-01-11 10:26:12,789][root][INFO] - Reading file /root/DPR/downloads/data/retriever/nq-dev.json
+[2022-01-11 10:26:16,924][root][INFO] - Aggregated data size: 6515
+[2022-01-11 10:26:16,927][dpr.data.biencoder_data][INFO] - Total cleaned data size: 6515
+[2022-01-11 10:26:16,927][root][INFO] - Aggregated data size: 6515
+[2022-01-11 10:26:16,927][root][INFO] - samples_per_shard=2172, shard_start_idx=4344, shard_end_idx=6515, max_iterations=33
+[2022-01-11 10:26:16,927][root][INFO] - rank=2; Multi set data sizes [6515]
+[2022-01-11 10:26:16,927][root][INFO] - rank=2; Multi set total data 6515
+[2022-01-11 10:26:16,927][root][INFO] - rank=2; Multi set sampling_rates [1]
+[2022-01-11 10:26:16,927][root][INFO] - rank=2; Multi set max_iterations per dataset [33]
+[2022-01-11 10:26:16,927][root][INFO] - rank=2; Multi set max_iterations 33
+[2022-01-11 10:26:16,927][root][INFO] - rank=2; Iteration start
+[2022-01-11 10:26:16,928][root][INFO] - rank=2; Multi set iteration: iteration ptr per set: [0]
+[2022-01-11 10:26:16,928][root][INFO] - rank=2; Multi set iteration: source 0, batches to be taken: 33
+[2022-01-11 10:26:16,928][root][INFO] - rank=2; data_src_indices len=33
+[2022-01-11 10:26:16,929][dpr.data.biencoder_data][INFO] - Total cleaned data size: 6515
+[2022-01-11 10:26:16,930][root][INFO] - samples_per_shard=2172, shard_start_idx=0, shard_end_idx=2172, max_iterations=33
+[2022-01-11 10:26:16,930][root][INFO] - rank=0; Multi set data sizes [6515]
+[2022-01-11 10:26:16,930][root][INFO] - rank=0; Multi set total data 6515
+[2022-01-11 10:26:16,930][root][INFO] - rank=0; Multi set sampling_rates [1]
+[2022-01-11 10:26:16,930][root][INFO] - rank=0; Multi set max_iterations per dataset [33]
+[2022-01-11 10:26:16,930][root][INFO] - rank=0; Multi set max_iterations 33
+[2022-01-11 10:26:16,930][root][INFO] - rank=0; Iteration start
+[2022-01-11 10:26:16,930][root][INFO] - rank=0; Multi set iteration: iteration ptr per set: [0]
+[2022-01-11 10:26:16,930][root][INFO] - rank=0; Multi set iteration: source 0, batches to be taken: 33
+[2022-01-11 10:26:16,930][root][INFO] - rank=0; data_src_indices len=33
+[2022-01-11 10:26:16,936][root][INFO] - Eval step: 0 ,rnk=2
+[2022-01-11 10:26:16,938][root][INFO] - Eval step: 0 ,rnk=0
+[2022-01-11 10:26:17,056][root][INFO] - Aggregated data size: 6515
+[2022-01-11 10:26:17,059][dpr.data.biencoder_data][INFO] - Total cleaned data size: 6515
+[2022-01-11 10:26:17,059][root][INFO] - samples_per_shard=2172, shard_start_idx=2172, shard_end_idx=4344, max_iterations=33
+[2022-01-11 10:26:17,059][root][INFO] - rank=1; Multi set data sizes [6515]
+[2022-01-11 10:26:17,059][root][INFO] - rank=1; Multi set total data 6515
+[2022-01-11 10:26:17,059][root][INFO] - rank=1; Multi set sampling_rates [1]
+[2022-01-11 10:26:17,059][root][INFO] - rank=1; Multi set max_iterations per dataset [33]
+[2022-01-11 10:26:17,059][root][INFO] - rank=1; Multi set max_iterations 33
+[2022-01-11 10:26:17,059][root][INFO] - rank=1; Iteration start
+[2022-01-11 10:26:17,059][root][INFO] - rank=1; Multi set iteration: iteration ptr per set: [0]
+[2022-01-11 10:26:17,059][root][INFO] - rank=1; Multi set iteration: source 0, batches to be taken: 33
+[2022-01-11 10:26:17,059][root][INFO] - rank=1; data_src_indices len=33
+[2022-01-11 10:26:17,067][root][INFO] - Eval step: 0 ,rnk=1
+[2022-01-11 10:26:17,789][root][INFO] - Eval step: 1 ,rnk=2
+[2022-01-11 10:26:17,789][root][INFO] - Eval step: 1 ,rnk=0
+[2022-01-11 10:26:17,790][root][INFO] - Eval step: 1 ,rnk=1
+[2022-01-11 10:26:18,506][root][INFO] - Eval step: 2 ,rnk=2
+[2022-01-11 10:26:18,506][root][INFO] - Eval step: 2 ,rnk=0
+[2022-01-11 10:26:18,507][root][INFO] - Eval step: 2 ,rnk=1
+[2022-01-11 10:26:19,224][root][INFO] - Eval step: 3 ,rnk=1
+[2022-01-11 10:26:19,224][root][INFO] - Eval step: 3 ,rnk=0
+[2022-01-11 10:26:19,224][root][INFO] - Eval step: 3 ,rnk=2
+[2022-01-11 10:26:19,942][root][INFO] - Eval step: 4 ,rnk=1
+[2022-01-11 10:26:19,942][root][INFO] - Eval step: 4 ,rnk=0
+[2022-01-11 10:26:19,943][root][INFO] - Eval step: 4 ,rnk=2
+[2022-01-11 10:26:20,659][root][INFO] - Eval step: 5 ,rnk=0
+[2022-01-11 10:26:20,659][root][INFO] - Eval step: 5 ,rnk=2
+[2022-01-11 10:26:20,660][root][INFO] - Eval step: 5 ,rnk=1
+[2022-01-11 10:26:21,377][root][INFO] - Eval step: 6 ,rnk=0
+[2022-01-11 10:26:21,377][root][INFO] - Eval step: 6 ,rnk=1
+[2022-01-11 10:26:21,379][root][INFO] - Eval step: 6 ,rnk=2
+[2022-01-11 10:26:22,700][root][INFO] - Eval step: 7 ,rnk=1
+[2022-01-11 10:26:22,702][root][INFO] - Eval step: 7 ,rnk=2
+[2022-01-11 10:26:22,705][root][INFO] - Eval step: 7 ,rnk=0
+[2022-01-11 10:26:23,422][root][INFO] - Eval step: 8 ,rnk=1
+[2022-01-11 10:26:23,422][root][INFO] - Eval step: 8 ,rnk=0
+[2022-01-11 10:26:23,422][root][INFO] - Eval step: 8 ,rnk=2
+[2022-01-11 10:26:24,139][root][INFO] - Eval step: 9 ,rnk=1
+[2022-01-11 10:26:24,140][root][INFO] - Eval step: 9 ,rnk=0
+[2022-01-11 10:26:24,140][root][INFO] - Eval step: 9 ,rnk=2
+[2022-01-11 10:26:24,858][root][INFO] - Eval step: 10 ,rnk=2
+[2022-01-11 10:26:24,858][root][INFO] - Eval step: 10 ,rnk=1
+[2022-01-11 10:26:24,858][root][INFO] - Eval step: 10 ,rnk=0
+[2022-01-11 10:26:25,575][root][INFO] - Eval step: 11 ,rnk=2
+[2022-01-11 10:26:25,575][root][INFO] - Eval step: 11 ,rnk=0
+[2022-01-11 10:26:25,575][root][INFO] - Eval step: 11 ,rnk=1
+[2022-01-11 10:26:26,292][root][INFO] - Eval step: 12 ,rnk=2
+[2022-01-11 10:26:26,292][root][INFO] - Eval step: 12 ,rnk=0
+[2022-01-11 10:26:26,292][root][INFO] - Eval step: 12 ,rnk=1
+[2022-01-11 10:26:27,012][root][INFO] - Eval step: 13 ,rnk=2
+[2022-01-11 10:26:27,012][root][INFO] - Eval step: 13 ,rnk=0
+[2022-01-11 10:26:27,012][root][INFO] - Eval step: 13 ,rnk=1
+[2022-01-11 10:26:27,731][root][INFO] - Eval step: 14 ,rnk=2
+[2022-01-11 10:26:27,731][root][INFO] - Eval step: 14 ,rnk=0
+[2022-01-11 10:26:27,731][root][INFO] - Eval step: 14 ,rnk=1
+[2022-01-11 10:26:28,449][root][INFO] - Eval step: 15 ,rnk=0
+[2022-01-11 10:26:28,449][root][INFO] - Eval step: 15 ,rnk=2
+[2022-01-11 10:26:28,450][root][INFO] - Eval step: 15 ,rnk=1
+[2022-01-11 10:26:29,171][root][INFO] - Eval step: 16 ,rnk=1
+[2022-01-11 10:26:29,171][root][INFO] - Eval step: 16 ,rnk=0
+[2022-01-11 10:26:29,171][root][INFO] - Eval step: 16 ,rnk=2
+[2022-01-11 10:26:29,892][root][INFO] - Eval step: 17 ,rnk=2
+[2022-01-11 10:26:29,892][root][INFO] - Eval step: 17 ,rnk=0
+[2022-01-11 10:26:29,894][root][INFO] - Eval step: 17 ,rnk=1
+[2022-01-11 10:26:30,611][root][INFO] - Eval step: 18 ,rnk=2
+[2022-01-11 10:26:30,611][root][INFO] - Eval step: 18 ,rnk=0
+[2022-01-11 10:26:30,613][root][INFO] - Eval step: 18 ,rnk=1
+[2022-01-11 10:26:31,332][root][INFO] - Eval step: 19 ,rnk=0
+[2022-01-11 10:26:31,332][root][INFO] - Eval step: 19 ,rnk=2
+[2022-01-11 10:26:31,334][root][INFO] - Eval step: 19 ,rnk=1
+[2022-01-11 10:26:32,053][root][INFO] - Eval step: 20 ,rnk=0
+[2022-01-11 10:26:32,053][root][INFO] - Eval step: 20 ,rnk=2
+[2022-01-11 10:26:32,055][root][INFO] - Eval step: 20 ,rnk=1
+[2022-01-11 10:26:33,386][root][INFO] - Eval step: 21 ,rnk=2
+[2022-01-11 10:26:33,387][root][INFO] - Eval step: 21 ,rnk=0
+[2022-01-11 10:26:33,403][root][INFO] - Eval step: 21 ,rnk=1
+[2022-01-11 10:26:34,123][root][INFO] - Eval step: 22 ,rnk=2
+[2022-01-11 10:26:34,123][root][INFO] - Eval step: 22 ,rnk=0
+[2022-01-11 10:26:34,124][root][INFO] - Eval step: 22 ,rnk=1
+[2022-01-11 10:26:34,843][root][INFO] - Eval step: 23 ,rnk=2
+[2022-01-11 10:26:34,843][root][INFO] - Eval step: 23 ,rnk=0
+[2022-01-11 10:26:34,844][root][INFO] - Eval step: 23 ,rnk=1
+[2022-01-11 10:26:35,560][root][INFO] - Eval step: 24 ,rnk=0
+[2022-01-11 10:26:35,560][root][INFO] - Eval step: 24 ,rnk=2
+[2022-01-11 10:26:35,563][root][INFO] - Eval step: 24 ,rnk=1
+[2022-01-11 10:26:36,283][root][INFO] - Eval step: 25 ,rnk=2
+[2022-01-11 10:26:36,283][root][INFO] - Eval step: 25 ,rnk=0
+[2022-01-11 10:26:36,285][root][INFO] - Eval step: 25 ,rnk=1
+[2022-01-11 10:26:37,001][root][INFO] - Eval step: 26 ,rnk=0
+[2022-01-11 10:26:37,001][root][INFO] - Eval step: 26 ,rnk=2
+[2022-01-11 10:26:37,004][root][INFO] - Eval step: 26 ,rnk=1
+[2022-01-11 10:26:37,721][root][INFO] - Eval step: 27 ,rnk=0
+[2022-01-11 10:26:37,721][root][INFO] - Eval step: 27 ,rnk=2
+[2022-01-11 10:26:37,723][root][INFO] - Eval step: 27 ,rnk=1
+[2022-01-11 10:26:38,444][root][INFO] - Eval step: 28 ,rnk=2
+[2022-01-11 10:26:38,444][root][INFO] - Eval step: 28 ,rnk=0
+[2022-01-11 10:26:38,445][root][INFO] - Eval step: 28 ,rnk=1
+[2022-01-11 10:26:39,165][root][INFO] - Eval step: 29 ,rnk=0
+[2022-01-11 10:26:39,165][root][INFO] - Eval step: 29 ,rnk=2
+[2022-01-11 10:26:39,166][root][INFO] - Eval step: 29 ,rnk=1
+[2022-01-11 10:26:39,886][root][INFO] - Eval step: 30 ,rnk=2
+[2022-01-11 10:26:39,886][root][INFO] - Eval step: 30 ,rnk=0
+[2022-01-11 10:26:39,887][root][INFO] - Eval step: 30 ,rnk=1
+[2022-01-11 10:26:40,606][root][INFO] - Eval step: 31 ,rnk=2
+[2022-01-11 10:26:40,606][root][INFO] - Eval step: 31 ,rnk=0
+[2022-01-11 10:26:40,607][root][INFO] - Eval step: 31 ,rnk=1
+[2022-01-11 10:26:41,323][root][INFO] - Eval step: 32 ,rnk=0
+[2022-01-11 10:26:41,323][root][INFO] - Eval step: 32 ,rnk=2
+[2022-01-11 10:26:41,325][root][INFO] - Eval step: 32 ,rnk=1
+[2022-01-11 10:26:42,032][root][INFO] - rank=2; last iteration 33
+[2022-01-11 10:26:42,032][root][INFO] - rank=0; last iteration 33
+[2022-01-11 10:26:42,032][root][INFO] - rank=2; Multi set iteration finished: iteration per set: [33]
+[2022-01-11 10:26:42,032][root][INFO] - rank=0; Multi set iteration finished: iteration per set: [33]
+[2022-01-11 10:26:42,032][root][INFO] - Finished iterating, iteration=33, shard=2
+[2022-01-11 10:26:42,032][root][INFO] - Finished iterating, iteration=33, shard=0
+[2022-01-11 10:26:42,032][root][INFO] - rank=2; Multi set iteration finished after next: iteration per set: [0]
+[2022-01-11 10:26:42,032][root][INFO] - rank=0; Multi set iteration finished after next: iteration per set: [0]
+[2022-01-11 10:26:42,032][root][INFO] - NLL Validation: loss = 0.520921. correct prediction ratio  5243/6336 ~  0.827494
+[2022-01-11 10:26:42,032][root][INFO] - NLL Validation: loss = 0.520921. correct prediction ratio  5243/6336 ~  0.827494
+[2022-01-11 10:26:42,033][root][INFO] - rank=1; last iteration 33
+[2022-01-11 10:26:42,033][root][INFO] - rank=1; Multi set iteration finished: iteration per set: [33]
+[2022-01-11 10:26:42,033][root][INFO] - Finished iterating, iteration=33, shard=1
+[2022-01-11 10:26:42,033][root][INFO] - rank=1; Multi set iteration finished after next: iteration per set: [0]
+[2022-01-11 10:26:42,033][root][INFO] - NLL Validation: loss = 0.520921. correct prediction ratio  5243/6336 ~  0.827494
+[2022-01-11 10:26:42,035][root][INFO] - rank=2; last iteration 1226
+[2022-01-11 10:26:42,035][root][INFO] - rank=2; Multi set iteration finished: iteration per set: [1226]
+[2022-01-11 10:26:42,035][root][INFO] - Finished iterating, iteration=1226, shard=2
+[2022-01-11 10:26:42,035][root][INFO] - rank=2; Multi set iteration finished after next: iteration per set: [0]
+[2022-01-11 10:26:42,035][root][INFO] - Epoch finished on 2
+[2022-01-11 10:26:42,035][root][INFO] - rank=1; last iteration 1226
+[2022-01-11 10:26:42,035][root][INFO] - rank=1; Multi set iteration finished: iteration per set: [1226]
+[2022-01-11 10:26:42,036][root][INFO] - NLL validation ...
+[2022-01-11 10:26:42,036][root][INFO] - Finished iterating, iteration=1226, shard=1
+[2022-01-11 10:26:42,036][root][INFO] - rank=1; Multi set iteration finished after next: iteration per set: [0]
+[2022-01-11 10:26:42,036][root][INFO] - Epoch finished on 1
+[2022-01-11 10:26:42,036][root][INFO] - NLL validation ...
+[2022-01-11 10:26:42,037][root][INFO] - rank=2; Iteration start
+[2022-01-11 10:26:42,037][root][INFO] - rank=2; Multi set iteration: iteration ptr per set: [0]
+[2022-01-11 10:26:42,037][root][INFO] - rank=2; Multi set iteration: source 0, batches to be taken: 33
+[2022-01-11 10:26:42,037][root][INFO] - rank=2; data_src_indices len=33
+[2022-01-11 10:26:42,038][root][INFO] - rank=1; Iteration start
+[2022-01-11 10:26:42,038][root][INFO] - rank=1; Multi set iteration: iteration ptr per set: [0]
+[2022-01-11 10:26:42,038][root][INFO] - rank=1; Multi set iteration: source 0, batches to be taken: 33
+[2022-01-11 10:26:42,038][root][INFO] - rank=1; data_src_indices len=33
+[2022-01-11 10:26:42,044][root][INFO] - Eval step: 0 ,rnk=2
+[2022-01-11 10:26:42,046][root][INFO] - Eval step: 0 ,rnk=1
+[2022-01-11 10:26:45,461][root][INFO] - Saved checkpoint at ./nq_out/dpr_biencoder.0
+[2022-01-11 10:26:45,462][root][INFO] - Saved checkpoint to ./nq_out/dpr_biencoder.0
+[2022-01-11 10:26:45,462][root][INFO] - New Best validation checkpoint ./nq_out/dpr_biencoder.0
+[2022-01-11 10:26:45,463][root][INFO] - rank=0; last iteration 1226
+[2022-01-11 10:26:45,463][root][INFO] - rank=0; Multi set iteration finished: iteration per set: [1226]
+[2022-01-11 10:26:45,463][root][INFO] - Finished iterating, iteration=1226, shard=0
+[2022-01-11 10:26:45,464][root][INFO] - rank=0; Multi set iteration finished after next: iteration per set: [0]
+[2022-01-11 10:26:45,464][root][INFO] - Epoch finished on 0
+[2022-01-11 10:26:45,464][root][INFO] - NLL validation ...
+[2022-01-11 10:26:45,465][root][INFO] - rank=0; Iteration start
+[2022-01-11 10:26:45,465][root][INFO] - rank=0; Multi set iteration: iteration ptr per set: [0]
+[2022-01-11 10:26:45,466][root][INFO] - rank=0; Multi set iteration: source 0, batches to be taken: 33
+[2022-01-11 10:26:45,466][root][INFO] - rank=0; data_src_indices len=33
+[2022-01-11 10:26:45,474][root][INFO] - Eval step: 0 ,rnk=0
+[2022-01-11 10:26:46,199][root][INFO] - Eval step: 1 ,rnk=2
+[2022-01-11 10:26:46,199][root][INFO] - Eval step: 1 ,rnk=0
+[2022-01-11 10:26:46,200][root][INFO] - Eval step: 1 ,rnk=1
+[2022-01-11 10:26:47,531][root][INFO] - Eval step: 2 ,rnk=2
+[2022-01-11 10:26:47,531][root][INFO] - Eval step: 2 ,rnk=0
+[2022-01-11 10:26:47,785][root][INFO] - Eval step: 2 ,rnk=1
+[2022-01-11 10:26:48,506][root][INFO] - Eval step: 3 ,rnk=0
+[2022-01-11 10:26:48,506][root][INFO] - Eval step: 3 ,rnk=1
+[2022-01-11 10:26:48,506][root][INFO] - Eval step: 3 ,rnk=2
+[2022-01-11 10:26:49,226][root][INFO] - Eval step: 4 ,rnk=0
+[2022-01-11 10:26:49,226][root][INFO] - Eval step: 4 ,rnk=1
+[2022-01-11 10:26:49,227][root][INFO] - Eval step: 4 ,rnk=2
+[2022-01-11 10:26:49,946][root][INFO] - Eval step: 5 ,rnk=0
+[2022-01-11 10:26:49,947][root][INFO] - Eval step: 5 ,rnk=1
+[2022-01-11 10:26:49,947][root][INFO] - Eval step: 5 ,rnk=2
+[2022-01-11 10:26:50,669][root][INFO] - Eval step: 6 ,rnk=2
+[2022-01-11 10:26:50,669][root][INFO] - Eval step: 6 ,rnk=1
+[2022-01-11 10:26:50,669][root][INFO] - Eval step: 6 ,rnk=0
+[2022-01-11 10:26:51,390][root][INFO] - Eval step: 7 ,rnk=1
+[2022-01-11 10:26:51,391][root][INFO] - Eval step: 7 ,rnk=0
+[2022-01-11 10:26:51,392][root][INFO] - Eval step: 7 ,rnk=2
+[2022-01-11 10:26:52,112][root][INFO] - Eval step: 8 ,rnk=2
+[2022-01-11 10:26:52,113][root][INFO] - Eval step: 8 ,rnk=1
+[2022-01-11 10:26:52,115][root][INFO] - Eval step: 8 ,rnk=0
+[2022-01-11 10:26:52,836][root][INFO] - Eval step: 9 ,rnk=0
+[2022-01-11 10:26:52,836][root][INFO] - Eval step: 9 ,rnk=2
+[2022-01-11 10:26:52,836][root][INFO] - Eval step: 9 ,rnk=1
+[2022-01-11 10:26:53,555][root][INFO] - Eval step: 10 ,rnk=2
+[2022-01-11 10:26:53,555][root][INFO] - Eval step: 10 ,rnk=0
+[2022-01-11 10:26:53,556][root][INFO] - Eval step: 10 ,rnk=1
+[2022-01-11 10:26:54,275][root][INFO] - Eval step: 11 ,rnk=2
+[2022-01-11 10:26:54,275][root][INFO] - Eval step: 11 ,rnk=0
+[2022-01-11 10:26:54,275][root][INFO] - Eval step: 11 ,rnk=1
+[2022-01-11 10:26:54,994][root][INFO] - Eval step: 12 ,rnk=0
+[2022-01-11 10:26:54,994][root][INFO] - Eval step: 12 ,rnk=2
+[2022-01-11 10:26:54,994][root][INFO] - Eval step: 12 ,rnk=1
+[2022-01-11 10:26:55,717][root][INFO] - Eval step: 13 ,rnk=2
+[2022-01-11 10:26:55,717][root][INFO] - Eval step: 13 ,rnk=0
+[2022-01-11 10:26:55,717][root][INFO] - Eval step: 13 ,rnk=1
+[2022-01-11 10:26:56,436][root][INFO] - Eval step: 14 ,rnk=0
+[2022-01-11 10:26:56,436][root][INFO] - Eval step: 14 ,rnk=1
+[2022-01-11 10:26:56,436][root][INFO] - Eval step: 14 ,rnk=2
+[2022-01-11 10:26:57,157][root][INFO] - Eval step: 15 ,rnk=1
+[2022-01-11 10:26:57,158][root][INFO] - Eval step: 15 ,rnk=2
+[2022-01-11 10:26:57,931][root][INFO] - Eval step: 15 ,rnk=0
+[2022-01-11 10:26:58,650][root][INFO] - Eval step: 16 ,rnk=0
+[2022-01-11 10:26:59,264][root][INFO] - Eval step: 16 ,rnk=1
+[2022-01-11 10:26:59,445][root][INFO] - Eval step: 16 ,rnk=2
+[2022-01-11 10:27:00,164][root][INFO] - Eval step: 17 ,rnk=1
+[2022-01-11 10:27:00,165][root][INFO] - Eval step: 17 ,rnk=2
+[2022-01-11 10:27:00,168][root][INFO] - Eval step: 17 ,rnk=0
+[2022-01-11 10:27:00,886][root][INFO] - Eval step: 18 ,rnk=1
+[2022-01-11 10:27:00,887][root][INFO] - Eval step: 18 ,rnk=0
+[2022-01-11 10:27:00,887][root][INFO] - Eval step: 18 ,rnk=2
+[2022-01-11 10:27:01,607][root][INFO] - Eval step: 19 ,rnk=1
+[2022-01-11 10:27:01,607][root][INFO] - Eval step: 19 ,rnk=2
+[2022-01-11 10:27:01,607][root][INFO] - Eval step: 19 ,rnk=0
+[2022-01-11 10:27:02,327][root][INFO] - Eval step: 20 ,rnk=1
+[2022-01-11 10:27:02,327][root][INFO] - Eval step: 20 ,rnk=2
+[2022-01-11 10:27:02,327][root][INFO] - Eval step: 20 ,rnk=0
+[2022-01-11 10:27:03,045][root][INFO] - Eval step: 21 ,rnk=1
+[2022-01-11 10:27:03,046][root][INFO] - Eval step: 21 ,rnk=2
+[2022-01-11 10:27:03,046][root][INFO] - Eval step: 21 ,rnk=0
+[2022-01-11 10:27:03,768][root][INFO] - Eval step: 22 ,rnk=1
+[2022-01-11 10:27:03,768][root][INFO] - Eval step: 22 ,rnk=2
+[2022-01-11 10:27:03,768][root][INFO] - Eval step: 22 ,rnk=0
+[2022-01-11 10:27:04,487][root][INFO] - Eval step: 23 ,rnk=1
+[2022-01-11 10:27:04,487][root][INFO] - Eval step: 23 ,rnk=2
+[2022-01-11 10:27:04,487][root][INFO] - Eval step: 23 ,rnk=0
+[2022-01-11 10:27:05,206][root][INFO] - Eval step: 24 ,rnk=1
+[2022-01-11 10:27:05,208][root][INFO] - Eval step: 24 ,rnk=2
+[2022-01-11 10:27:05,210][root][INFO] - Eval step: 24 ,rnk=0
+[2022-01-11 10:27:05,928][root][INFO] - Eval step: 25 ,rnk=1
+[2022-01-11 10:27:05,929][root][INFO] - Eval step: 25 ,rnk=2
+[2022-01-11 10:27:05,929][root][INFO] - Eval step: 25 ,rnk=0
+[2022-01-11 10:27:06,650][root][INFO] - Eval step: 26 ,rnk=1
+[2022-01-11 10:27:06,652][root][INFO] - Eval step: 26 ,rnk=0
+[2022-01-11 10:27:06,652][root][INFO] - Eval step: 26 ,rnk=2
+[2022-01-11 10:27:07,369][root][INFO] - Eval step: 27 ,rnk=1
+[2022-01-11 10:27:07,370][root][INFO] - Eval step: 27 ,rnk=2
+[2022-01-11 10:27:07,370][root][INFO] - Eval step: 27 ,rnk=0
+[2022-01-11 10:27:08,091][root][INFO] - Eval step: 28 ,rnk=1
+[2022-01-11 10:27:08,092][root][INFO] - Eval step: 28 ,rnk=2
+[2022-01-11 10:27:08,092][root][INFO] - Eval step: 28 ,rnk=0
+[2022-01-11 10:27:08,814][root][INFO] - Eval step: 29 ,rnk=1
+[2022-01-11 10:27:08,815][root][INFO] - Eval step: 29 ,rnk=2
+[2022-01-11 10:27:09,538][root][INFO] - Eval step: 29 ,rnk=0
+[2022-01-11 10:27:10,257][root][INFO] - Eval step: 30 ,rnk=0
+[2022-01-11 10:27:10,856][root][INFO] - Eval step: 30 ,rnk=1
+[2022-01-11 10:27:10,956][root][INFO] - Eval step: 30 ,rnk=2
+[2022-01-11 10:27:11,675][root][INFO] - Eval step: 31 ,rnk=1
+[2022-01-11 10:27:11,676][root][INFO] - Eval step: 31 ,rnk=2
+[2022-01-11 10:27:11,677][root][INFO] - Eval step: 31 ,rnk=0
+[2022-01-11 10:27:12,394][root][INFO] - Eval step: 32 ,rnk=1
+[2022-01-11 10:27:12,395][root][INFO] - Eval step: 32 ,rnk=2
+[2022-01-11 10:27:12,395][root][INFO] - Eval step: 32 ,rnk=0
+[2022-01-11 10:27:13,103][root][INFO] - rank=2; last iteration 33
+[2022-01-11 10:27:13,103][root][INFO] - rank=0; last iteration 33
+[2022-01-11 10:27:13,103][root][INFO] - rank=2; Multi set iteration finished: iteration per set: [33]
+[2022-01-11 10:27:13,103][root][INFO] - rank=0; Multi set iteration finished: iteration per set: [33]
+[2022-01-11 10:27:13,103][root][INFO] - Finished iterating, iteration=33, shard=2
+[2022-01-11 10:27:13,103][root][INFO] - Finished iterating, iteration=33, shard=0
+[2022-01-11 10:27:13,103][root][INFO] - rank=2; Multi set iteration finished after next: iteration per set: [0]
+[2022-01-11 10:27:13,103][root][INFO] - rank=0; Multi set iteration finished after next: iteration per set: [0]
+[2022-01-11 10:27:13,103][root][INFO] - NLL Validation: loss = 0.520921. correct prediction ratio  5243/6336 ~  0.827494
+[2022-01-11 10:27:13,103][root][INFO] - NLL Validation: loss = 0.520921. correct prediction ratio  5243/6336 ~  0.827494
+[2022-01-11 10:27:13,104][root][INFO] - rank=1; last iteration 33
+[2022-01-11 10:27:13,104][root][INFO] - rank=1; Multi set iteration finished: iteration per set: [33]
+[2022-01-11 10:27:13,104][root][INFO] - Finished iterating, iteration=33, shard=1
+[2022-01-11 10:27:13,104][root][INFO] - rank=1; Multi set iteration finished after next: iteration per set: [0]
+[2022-01-11 10:27:13,104][root][INFO] - NLL Validation: loss = 0.520921. correct prediction ratio  5243/6336 ~  0.827494
+[2022-01-11 10:27:13,104][root][INFO] - Av Loss per epoch=2.654329
+[2022-01-11 10:27:13,105][root][INFO] - epoch total correct predictions=43269
+[2022-01-11 10:27:13,105][root][INFO] - Av Loss per epoch=2.654329
+[2022-01-11 10:27:13,105][root][INFO] - epoch total correct predictions=43269
+[2022-01-11 10:27:13,106][root][INFO] - ***** Epoch 1 *****
+[2022-01-11 10:27:13,107][root][INFO] - ***** Epoch 1 *****
+[2022-01-11 10:27:13,108][root][INFO] - rank=2; Iteration start
+[2022-01-11 10:27:13,108][root][INFO] - rank=2; Multi set iteration: iteration ptr per set: [0]
+[2022-01-11 10:27:13,108][root][INFO] - rank=2; Multi set iteration: source 0, batches to be taken: 1226
+[2022-01-11 10:27:13,108][root][INFO] - rank=2; data_src_indices len=1226
+[2022-01-11 10:27:13,108][root][INFO] - rank=1; Iteration start
+[2022-01-11 10:27:13,109][root][INFO] - rank=1; Multi set iteration: iteration ptr per set: [0]
+[2022-01-11 10:27:13,109][root][INFO] - rank=1; Multi set iteration: source 0, batches to be taken: 1226
+[2022-01-11 10:27:13,109][root][INFO] - rank=1; data_src_indices len=1226
+[2022-01-11 10:27:17,640][root][INFO] - Saved checkpoint at ./nq_out/dpr_biencoder.0
+[2022-01-11 10:27:17,641][root][INFO] - Saved checkpoint to ./nq_out/dpr_biencoder.0
+[2022-01-11 10:27:17,641][root][INFO] - Av Loss per epoch=2.654329
+[2022-01-11 10:27:17,641][root][INFO] - epoch total correct predictions=43269
+[2022-01-11 10:27:17,643][root][INFO] - ***** Epoch 1 *****
+[2022-01-11 10:27:17,645][root][INFO] - rank=0; Iteration start
+[2022-01-11 10:27:17,645][root][INFO] - rank=0; Multi set iteration: iteration ptr per set: [0]
+[2022-01-11 10:27:17,645][root][INFO] - rank=0; Multi set iteration: source 0, batches to be taken: 1226
+[2022-01-11 10:27:17,646][root][INFO] - rank=0; data_src_indices len=1226
+[2022-01-11 10:27:18,363][root][INFO] - Epoch: 1: Step: 1/1226, loss=0.283036, lr=0.000007
+[2022-01-11 10:27:18,371][root][INFO] - Epoch: 1: Step: 1/1226, loss=0.283036, lr=0.000007
+[2022-01-11 10:27:18,372][root][INFO] - Epoch: 1: Step: 1/1226, loss=0.283036, lr=0.000007
+[2022-01-11 10:28:27,161][root][INFO] - Train batch 100
+[2022-01-11 10:28:27,162][root][INFO] - Avg. loss per last 100 batches: 0.226363
+[2022-01-11 10:28:27,166][root][INFO] - Train batch 100
+[2022-01-11 10:28:27,166][root][INFO] - Avg. loss per last 100 batches: 0.226363
+[2022-01-11 10:28:27,170][root][INFO] - Train batch 100
+[2022-01-11 10:28:27,170][root][INFO] - Avg. loss per last 100 batches: 0.226363
+[2022-01-11 10:28:28,797][root][INFO] - Epoch: 1: Step: 101/1226, loss=0.158882, lr=0.000007
+[2022-01-11 10:28:28,800][root][INFO] - Epoch: 1: Step: 101/1226, loss=0.158882, lr=0.000007
+[2022-01-11 10:28:28,808][root][INFO] - Epoch: 1: Step: 101/1226, loss=0.158882, lr=0.000007

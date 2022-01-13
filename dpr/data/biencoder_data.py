@@ -32,6 +32,7 @@ class RepTokenSelector(object):
         raise NotImplementedError
 
 
+### usage?
 class RepStaticPosTokenSelector(RepTokenSelector):
     def __init__(self, static_position: int = 0):
         self.static_position = static_position

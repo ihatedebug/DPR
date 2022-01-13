@@ -128,6 +128,7 @@ class ShardedDataIterator(object):
         max_iterations = self.max_iterations - self.iteration
         shard_indices = self.get_shard_indices(epoch)
 
+        # XXX 왜 ㅇㅈㄹ? => 
         for i in range(self.iteration * self.batch_size, len(shard_indices), self.batch_size):
             items_idxs = shard_indices[i : i + self.batch_size]
             if self.strict_batch_size and len(items_idxs) < self.batch_size:
@@ -219,7 +220,7 @@ class MultiSetDataIterator(object):
         iterators = []
         for source, src_its in enumerate(self.max_its_pr_ds):
             logger.info(
-                "rank=%d; Multi set iteration: source %d, batches to be taken: %s",
+                "rank=%d; Multi set iteration: source %d, batches to be taken: %s", # XXX: source is always 0?
                 self.rank,
                 source,
                 src_its,
@@ -233,7 +234,7 @@ class MultiSetDataIterator(object):
             epoch_rnd = random.Random(self.shuffle_seed + epoch)
             epoch_rnd.shuffle(data_src_indices)
 
-        logger.info("rank=%d; data_src_indices len=%d", self.rank, len(data_src_indices))
+        logger.info("rank=%d; data_src_indices len=%d", self.rank, len(data_src_indices)) # XXX: len(data_src_indices) = src_its?
         for i, source_idx in enumerate(data_src_indices):
             it = iterators[source_idx]
             next_item = next(it, None)

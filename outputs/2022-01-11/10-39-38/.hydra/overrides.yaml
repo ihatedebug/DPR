@@ -1,0 +1,6 @@
+- local_rank=0
+- train=biencoder_nq
+- train_datasets=[nq_train]
+- dev_datasets=[nq_dev]
+- train=biencoder_nq
+- output_dir=./nq_out

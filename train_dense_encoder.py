@@ -306,7 +306,7 @@ class BiEncoderTrainer(object):
 
         cfg = self.cfg
         self.biencoder.eval()
-        distributed_factor = self.distributed_factor
+        distributed_factor = self.distributed_factor  # world size
 
         if not self.dev_iterator:
             self.dev_iterator = self.get_data_iterator(
@@ -479,7 +479,7 @@ class BiEncoderTrainer(object):
             from dpr.data.biencoder_data import DEFAULT_SELECTOR
 
             selector = ds_cfg.selector if ds_cfg else DEFAULT_SELECTOR
-
+            # XXX: usage?
             rep_positions = selector.get_positions(biencoder_batch.question_ids, self.tensorizer)
 
             loss_scale = cfg.loss_scale_factors[dataset] if cfg.loss_scale_factors else None

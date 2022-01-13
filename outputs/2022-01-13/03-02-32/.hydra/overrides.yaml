@@ -1,0 +1,6 @@
+- model_file=/root/DPR/outputs/2022-01-11/10-39-38/nq_out/dpr_biencoder.39
+- ctx_src=dpr_wiki
+- shard_id=0
+- num_shards=1
+- batch_size=1024
+- out_file=/data1/jongho/nq/embeddings/dpr_biencoder.39
