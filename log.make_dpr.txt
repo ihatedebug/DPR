@@ -1,0 +1,22 @@
+################Train##################
+processing docs...
+processed 8841823 docs
+processing queries...processed 808731 queries
+processing bm25s...processed 807811 bm25s
+writing file...
+100%|██████████████████████████████████████████████████████████████████████████████████████████| 39780811/39780811 [57:05<00:00, 11614.04it/s]
+processed for DPR #39766841
+key error query : #0
+key error bm25 : #13970
+################Dev##################
+processing docs...
+processed 8841823 docs
+processing queries...
+processed 101093 queries
+processing bm25s...
+processed 101090 bm25s
+writing file...
+100%|████████████████████████████████████████████████████████████████████████████████| 59273/59273 [00:01<00:00, 31605.10it/s]
+processed for DPR #59273
+key error : #0
+key error bm25 : #0

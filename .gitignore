@@ -1,0 +1,5 @@
+data/**
+output/**
+indexes/**
+runs/**
+.cache/**
