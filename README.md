@@ -3,12 +3,14 @@
 - BM25는 **English query** to **English documents** 로 계산
 - hard negative ctxs는 question 당 3~4개
 - train triples (question, positive, negative) 에서 question 기준으로 중복되는 데이터 합침
-- train# : 398374 , dev#: 55578 
+- train# : 913mb, 398374 
+- dev#: 526mb, 55578 
 ```
 python prepare_bm25.py
 ./scripts/index_bm25_en.sh
 ./scripts/index_bm25_en_dev.sh
 ./scripts/index_bm25_en_train.sh
+python revise_id_file.py
 python make_dpr_dataset_new.py
 ```
 ## issues
