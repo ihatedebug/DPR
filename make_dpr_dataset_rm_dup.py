@@ -164,13 +164,18 @@ if __name__ == '__main__':
     # train 
     queries_path = "/data1/jongho/sigir/data/french_queries.train.tsv"
     filepath = "/data1/jongho/sigir/data/triples.train.ids.small.json"
-    bm25_path = "runs/run.french_train_new.txt"
+    bm25_path = "runs/run.english_train.txt"
     output_path = "output/dpr-mmarco-fren-train-rm-dup.json"
-    
     generate_examples_train(filepath=filepath, collection_path=collection_path, queries_path=queries_path, bm25_path=bm25_path, output_path=output_path)
     # dev
     queries_path = "/data1/jongho/sigir/data/french_queries.dev.tsv"
     filepath = "/data1/jongho/sigir/data/qrels.dev.json"
     bm25_path = "runs/run.english_dev.txt"
     output_path = "output/dpr-mmarco-fren-dev-rm-dup.json"
+    generate_examples_dev(filepath=filepath, collection_path=collection_path, queries_path=queries_path, bm25_path=bm25_path, output_path=output_path)
+    
+    # small dev
+    filepath = "/data1/jongho/sigir/data/qrels.dev.small.json"
+    bm25_path = "runs/run.english_dev.txt"
+    output_path = "output/dpr-mmarco-fren-dev-rm-dup.small.json"
     generate_examples_dev(filepath=filepath, collection_path=collection_path, queries_path=queries_path, bm25_path=bm25_path, output_path=output_path)

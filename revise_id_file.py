@@ -24,7 +24,7 @@ def remove_dup_train():
 
 def remove_dup_eval():
     quadraples = {}
-    filename = "/data1/jongho/sigir/data/qrels.dev.tsv"
+    filename = "/data1/jongho/sigir/data/qrels.dev.small.tsv"
     with open(filename, encoding="utf-8") as f:
         for (idx, line) in tqdm(enumerate(f)):
             query_id, iteration, pos_id, relevancy = line.rstrip().split("\t")
@@ -35,7 +35,7 @@ def remove_dup_eval():
             else:
                 quadraples[query_id] = {'iter': [iteration], 'pos_id': [pos_id], 'relevancy': [relevancy]}
     print(f"max pos length: {max([len(v['pos_id']) for v in quadraples.values()])}")
-    with open ("/data1/jongho/sigir/data/qrels.dev.json", "w") as json_file:
+    with open ("/data1/jongho/sigir/data/qrels.dev.small.json", "w") as json_file:
         json.dump(quadraples, json_file)
 
 remove_dup_eval()
