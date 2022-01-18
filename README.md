@@ -18,6 +18,7 @@ python make_dpr_dataset_rm_dup.py
 - [ ] pyserini로 BM25 계산 시 train queries(808731개) 중 920개, dev queries(59273개) 중 3개 Query에 대해서는 계산이 안됨
 - [ ] ~~한 query가 여러 doc을 positive로 갖는 경우 고려하지 않음.~~ -> 고려하는 것으로 수정. train dataset에서 overlap되는 query들을 하나로 합침
 - [ ] DPR dataset과 차이: answer, title 없음
+- [ ] qrels.dev.tsv 와 qrels.dev.small.tsv 중 전자 사용
 
 ## random sampling
 - train queries # words: 2,664,110 (fr) 2,377,466 (en)
