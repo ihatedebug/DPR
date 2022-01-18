@@ -4,5 +4,5 @@ python -m pyserini.search \
     --output runs/run.english_dev.txt \
     --batch-size 36 --threads 12 \
     --bm25 \
-    --hits 4
+    --hits 20
     

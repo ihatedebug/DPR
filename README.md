@@ -2,14 +2,15 @@
 - quetion: fr, docs: en
 - BM25는 **English query** to **English documents** 로 계산
 - hard negative ctxs는 question 당 3~4개
-- about 400GB..
+- train triples (question, positive, negative) 에서 question 기준으로 중복되는 데이터 합침
+- train# : 398374 , dev#: 55578 
 ```
 python prepare_bm25.py
 ./scripts/index_bm25_en.sh
 ./scripts/index_bm25_en_dev.sh
 ./scripts/index_bm25_en_train.sh
-python make_dpr_dataset.py
+python make_dpr_dataset_new.py
 ```
 ## issues
 - [ ] pyserini로 BM25 계산 시 train queries(808731개) 중 920개, dev queries(59273개) 중 3개 Query에 대해서는 계산이 안됨
-- [ ] 한 query가 여러 doc을 positive로 갖는 경우 고려하지 않음. 
+- [ ] ~~한 query가 여러 doc을 positive로 갖는 경우 고려하지 않음.~~ -> 고려하는 것으로 수정. train dataset에서 overlap되는 query들을 하나로 합침
