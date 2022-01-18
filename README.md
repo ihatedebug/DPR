@@ -16,3 +16,9 @@ python make_dpr_dataset_new.py
 ## issues
 - [ ] pyserini로 BM25 계산 시 train queries(808731개) 중 920개, dev queries(59273개) 중 3개 Query에 대해서는 계산이 안됨
 - [ ] ~~한 query가 여러 doc을 positive로 갖는 경우 고려하지 않음.~~ -> 고려하는 것으로 수정. train dataset에서 overlap되는 query들을 하나로 합침
+
+## random sampling
+- train queries # words: 2,662,841
+- preferred # words : 130,000 ~ 1,300,000
+- Let's sample 10%
+- After sampling, train queries # words: 266294
