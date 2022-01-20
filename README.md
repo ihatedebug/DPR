@@ -1,3 +1,4 @@
+
 # Multilingual marco dataset preprocessing for DPR
 - quetion: fr, docs: en
 - BM25는 **English query** to **English documents** 로 계산
@@ -12,7 +13,8 @@ python prepare_bm25.py
 ./scripts/index_bm25_en_dev.sh
 ./scripts/index_bm25_en_train.sh
 python revise_id_file.py
-python make_dpr_dataset_rm_dup.py
+and use scripts in scripts/make_dpr/
++ python count_words.py # random sampling if needed
 ```
 ## issues
 - [ ] pyserini로 BM25 계산 시 train queries(808731개) 중 920개, dev queries(59273개) 중 3개 Query에 대해서는 계산이 안됨
@@ -24,4 +26,9 @@ python make_dpr_dataset_rm_dup.py
 - train queries # words: 2,664,110 (fr) 2,377,466 (en)
 - preferred # words : 130,000 ~ 1,300,000
 - Let's sample 10%
-- After sampling, train queries # words: 266066 (fr), 237405 (en)
+- After sampling, train queries # words: 266632 (fr), 237597 (en)
+
+# mrtydi dataset for DPR
+- dev: query 1개 손실 (pyserini BM25 error)
+- before use, run `revise_id_file.py`
+- scripts in `/data1/jongho/sigir/scripts/mrtydi` 

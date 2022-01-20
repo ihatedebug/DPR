@@ -1,5 +1,6 @@
 import json
 from tqdm import tqdm
+import os
 
 def remove_dup_train():
     filename = "/data1/jongho/sigir/data/triples.train.ids.small.tsv"
@@ -22,12 +23,12 @@ def remove_dup_train():
     with open ("/data1/jongho/sigir/data/triples.train.ids.small.json", "w") as json_file:
         json.dump(triples, json_file)
 
-def remove_dup_eval():
+def remove_dup_eval(filename):
     quadraples = {}
-    filename = "/data1/jongho/sigir/data/qrels.dev.small.tsv"
+    
     with open(filename, encoding="utf-8") as f:
         for (idx, line) in tqdm(enumerate(f)):
-            query_id, iteration, pos_id, relevancy = line.rstrip().split("\t")
+            query_id, iteration, pos_id, relevancy = line.rstrip().split() # TODO: for marco: maybe "\t"? 
             if query_id in quadraples:
                 quadraples[query_id]['iter'].append(iteration)
                 quadraples[query_id]['pos_id'].append(pos_id)
@@ -35,7 +36,13 @@ def remove_dup_eval():
             else:
                 quadraples[query_id] = {'iter': [iteration], 'pos_id': [pos_id], 'relevancy': [relevancy]}
     print(f"max pos length: {max([len(v['pos_id']) for v in quadraples.values()])}")
-    with open ("/data1/jongho/sigir/data/qrels.dev.small.json", "w") as json_file:
+    save_name = os.path.splitext(filename)[0]+".json"
+    with open (save_name, "w") as json_file:
         json.dump(quadraples, json_file)
 
-remove_dup_eval()
+
+#filename = "/data1/jongho/sigir/data/qrels.dev.small.tsv"
+filename = "/data1/jongho/sigir/data/mrtydi-v1.0-korean/qrels.dev.txt"
+remove_dup_eval(filename)
+filename = "/data1/jongho/sigir/data/mrtydi-v1.0-korean/qrels.test.txt"
+remove_dup_eval(filename)
