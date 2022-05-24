@@ -28,7 +28,25 @@ and use scripts in scripts/make_dpr/
 - Let's sample 10%
 - After sampling, train queries # words: 266632 (fr), 237597 (en)
 
-# mrtydi dataset for DPR
+# mrtydi dataset for DPR (2022.02)
 - dev: query 1개 손실 (pyserini BM25 error)
 - before use, run `revise_id_file.py`
-- scripts in `/data1/jongho/sigir/scripts/mrtydi` 
+- scripts in `./scripts/mrtydi` 
+
+## mrtydi dataset for DPR (2022.05)
+- https://github.com/castorini/mr.tydi#download dataset과 pre-built BM25 index 다운로드
+- bm25 v1.1 issue -> use v1.1
+```
+git clone git@github.com:castorini/pyserini.git --recurse-submodules
+Cloning into 'pyserini'...
+The authenticity of host 'github.com (15.164.81.167)' can't be established.
+ECDSA key fingerprint is SHA256:p2QAMXNIC1TJYWeIOttrVc98/R1BUFWu3/LiyKgUfQM.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'github.com,15.164.81.167' (ECDSA) to the list of known hosts.
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+```
+- follow https://github.com/castorini/mr.tydi/tree/b11dcf3e52c4685d98bb6efaeabc0a356946da1e#baselines-and-evaluation for v1.0

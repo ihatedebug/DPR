@@ -7,6 +7,7 @@ import pickle
 import gzip
 import sys
 
+# only for mmarco train set. use _dev() for mrtydi
 def generate_examples_train(args):
     filepath=args.filepath
     collection_path=args.collection_path
@@ -75,7 +76,7 @@ def generate_examples_train(args):
             feature_list.append(features)
     
     with open(output_path, "w") as json_file:
-        json.dump(feature_list, json_file, indent=4)
+        json.dump(feature_list, json_file, indent=4, ensure_ascii=False)
     
     print(f"processed for DPR #{len(feature_list)}")
     print(f"key error query : #{len(not_in_query_list)}")
@@ -148,7 +149,7 @@ def generate_examples_dev(args):
                 continue
 
             # hard negatives
-            try:
+            try: # since the result of run bm25 is ordered, find from start position
                 hard_negative_ctxs = [{"text": collection[docs["doc_id"]], "score": docs["score"], "passage_id": docs["doc_id"]} for docs in bm25s[query_id] if docs['doc_id'] not in pos_ids]
                 hard_negative_ctxs=hard_negative_ctxs[:args.n_hard_negatives]
             except:
@@ -178,7 +179,7 @@ def generate_examples_dev(args):
             feature_list.append(features)
 
     with open(output_path, "w") as json_file:
-        json.dump(feature_list, json_file, indent=4)
+        json.dump(feature_list, json_file, indent=4, ensure_ascii=False)
 
     print(f"processed for DPR #{len(feature_list)}")
     print(f"key error : #{len(not_in_query_list)}")

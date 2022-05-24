@@ -1,0 +1,24 @@
+{
+    // IntelliSense를 사용하여 가능한 특성에 대해 알아보세요.
+    // 기존 특성에 대한 설명을 보려면 가리킵니다.
+    // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "make_dpr_dataset_refactored.py",
+            "console": "integratedTerminal",
+            "args": ["collection_path", "/data1/jongho/sigir/data/mrtydi_dataset/mrtydi-v1.0-bengali/collection/docs.jsonl.gz",
+            "queries_path", "/data1/jongho/sigir/data/mrtydi_dataset/mrtydi-v1.0-bengali/topic.dev.tsv",
+            "filepath", "/data1/jongho/sigir/data/mrtydi_dataset/mrtydi-v1.0-bengali/qrels.dev.json",
+            "bm25_path", "runs/run.bm25.mrtydi-v1.0-bengali.dev.txt",
+            "output_path", "output/mrtydi/dpr-mrtydi-bengali.dev.json",
+            "task", "mrtydi",
+            "n_negatives", "30", 
+            "n_hard_negatives", "30"],
+            "justMyCode": true
+        }
+    ]
+}
