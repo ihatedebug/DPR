@@ -19,7 +19,7 @@
 #     done;
 # done;
 
-# why syntax error
+# why syntax error??
 
 
 lang=bengali     # one of {'arabic', 'bengali', 'english', 'finnish', 'indonesian', 'japanese', 'korean', 'russian', 'swahili', 'telugu', 'thai'}
