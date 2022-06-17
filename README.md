@@ -35,7 +35,7 @@ and use scripts in scripts/make_dpr/
 
 ## mrtydi dataset for DPR (2022.05)
 - https://github.com/castorini/mr.tydi#download dataset과 pre-built BM25 index 다운로드
-- bm25 v1.1 issue -> use v1.1
+- bm25 v1.1 issue -> use v1.0
 ```
 git clone git@github.com:castorini/pyserini.git --recurse-submodules
 Cloning into 'pyserini'...
